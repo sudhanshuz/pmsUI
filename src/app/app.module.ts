@@ -11,13 +11,25 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule } from '@angular/forms';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import {MatIconModule} from '@angular/material/icon';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { DoctorDashboardComponent } from './pages/doctor/doctor-dashboard/doctor-dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     LoginComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    NavbarComponent,
+    AdminDashboardComponent,
+    DoctorDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -26,10 +38,20 @@ import { MatCardModule } from '@angular/material/card';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatCardModule
-
+    MatCardModule,
+    FormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatIconModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

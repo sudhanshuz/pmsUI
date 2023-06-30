@@ -1,5 +1,5 @@
 body{
-        background-image: url('../../../assets/welcomePage.png');
+        background-image: url('../../../assets/welcomePageUpdated.png');
         background-repeat: no-repeat;
         background-size: cover;
       }
@@ -13,5 +13,9 @@ body{
   }
   
   button {
-    margin: 10px;
+    margin: 100px;
+  }
+
+  .centered-button {
+    margin: 200 80px; /* Optional: Add margin between the buttons */
   }
