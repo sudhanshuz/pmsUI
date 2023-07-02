@@ -5,6 +5,10 @@ import { LoginComponent } from './pages/login/login.component';
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { DoctorDashboardComponent } from './pages/doctor/doctor-dashboard/doctor-dashboard.component';
+import { adminGuard } from './guards/admin.guard';
+import { doctorGuard } from './guards/doctor.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { HomeComponent } from './pages/home/home.component';
 const routes: Routes = [
   {
     path: 'signup',
@@ -24,12 +28,24 @@ const routes: Routes = [
   {
     path:'admin',
     component:AdminDashboardComponent,
-    pathMatch:'full'
+    canActivate:[adminGuard],
+    children:[
+      {path: 'profile',
+      component: ProfileComponent,
+      },{
+        path:'',
+        component:HomeComponent
+      }
+    ]
   },
   {
     path:'doctor',
     component:DoctorDashboardComponent,
-    pathMatch:'full'
+    pathMatch:'full',
+    canActivate:[doctorGuard],
+    children:[
+      
+    ]
   }
 
 ];
